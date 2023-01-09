@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit:
+    // https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "~/Library/Application Support/com.elgato.StreamDeck/Plugins/com.tr3ysmith.tplinkkasa.sdPlugin/plugin/streamdeck-kasa",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "attach",
+            "pid": "${command:pickProcess}",
+            "name": "Debug Elgato Plugin"
+        }
+    ]
+}
