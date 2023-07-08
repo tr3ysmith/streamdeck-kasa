@@ -105,7 +105,7 @@
     "Description": "Control your TP Link Kasa Devices.",
     "Name": "TP Link Kasa",
     "Icon": "plugin/images/icons/plugin",
-    "Category": "Lighting",
+    "Category": "TP Link Kasa",
     "CategoryIcon": "plugin/images/actions/category",
     "PropertyInspectorPath": "pi/index.html",
     "URL": "https://github.com/tr3ysmith/streamdeck-kasa",

@@ -7,6 +7,7 @@ use tracing_unwrap::{ResultExt, OptionExt};
 use anyhow::anyhow;
 
 mod elgato;
+mod kasa;
 
 
 /// The program is ran from elgato with the following passed arguments:
@@ -21,6 +22,7 @@ async fn main() {
     let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
     tracing_subscriber::fmt()
         .with_writer(non_blocking)
+        .with_ansi(false)
         .init();
     // let subscriber = FmtSubscriber::builder()
     //     .with_max_level(Level::TRACE)
@@ -62,12 +64,12 @@ async fn main() {
     let port = port_arg.ok_or("Port must be specified").unwrap_or_log();
     let uuid = uuid_arg.ok_or("UUID must be specified").unwrap_or_log();
     let event = event_arg.ok_or("Event type must be specified").unwrap_or_log();
-    let info: Option<ElgatoInfo>;
-    if let Some(info_json) = info_arg {
-        info = Some(serde_json::from_str(&info_json).map_err(|e| anyhow!("Unable to parse JSON: {}, {}", e, info_json)).unwrap_or_log());
+    
+    let info: Option<ElgatoInfo> = if let Some(info_json) = info_arg {
+        Some(serde_json::from_str(&info_json).map_err(|e| anyhow!("Unable to parse JSON: {}, {}", e, info_json)).unwrap_or_log())
     } else {
-        info = None;
-    }
+        None
+    };
 
     let elgato = ElgatoSocket::new(port, event, uuid);
 
